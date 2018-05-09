@@ -1,16 +1,52 @@
 {
-  "name": "comp-overlay",
+  "name": "compadre",
+  "homepage": "./",
+  "productName": "Compadre",
+  "author": "Gaston Figueroa",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "electron-is-dev": "^0.3.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4"
   },
+  "main": "public/electron.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build",
+    "pretty": "prettier --write --single-quote 'src/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "electron": "^1.8.4",
+    "electron-builder": "^20.5.1",
+    "eslint": "^4.19.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "1.11.1"
+  },
+  "build": {
+    "appId": "com.gastonfig.compadre",
+    "files": [
+      "build/**/*"
+    ]
   }
 }
