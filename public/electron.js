@@ -8,7 +8,12 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({
+    frame: false,
+    height: 600,
+    transparent: true,
+    width: 800
+  });
 
   // and load the index.html of the app.
   const startUrl =
@@ -29,6 +34,11 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  // Workaround for bug where shadow is added if window is resized
+  mainWindow.on('resize', function() {
+    mainWindow.setHasShadow(false);
   });
 }
 

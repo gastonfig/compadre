@@ -11,10 +11,12 @@ class App extends Component {
     super(props);
 
     this.state = {
+      opacity: 1,
       zoom: 1
     };
 
     this.decrementZoom = this.decrementZoom.bind(this);
+    this.handleOpacityChange = this.handleOpacityChange.bind(this);
     this.incrementZoom = this.incrementZoom.bind(this);
     this.updateZoom = this.updateZoom.bind(this);
   }
@@ -22,16 +24,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Controls
-          decrementZoom={this.decrementZoom}
-          incrementZoom={this.incrementZoom}
-        />
-        <Comp
-          image={image}
-          zoom={this.state.zoom}
-        />
+        <div className="titleBar" />
+        <div className="container">
+          <Controls
+            decrementZoom={this.decrementZoom}
+            handleOpacityChange={this.handleOpacityChange}
+            incrementZoom={this.incrementZoom}
+            opacity={this.state.opacity}
+            zoom={this.state.zoom}
+          />
+          <Comp
+            image={image}
+            opacity={this.state.opacity}
+            zoom={this.state.zoom}
+          />
+        </div>
       </div>
     );
+  }
+
+  handleOpacityChange(event) {
+    this.setState({ opacity: event.target.value });
   }
 
   decrementZoom() {
