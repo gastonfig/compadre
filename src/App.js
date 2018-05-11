@@ -4,7 +4,7 @@ import './App.css';
 import Comp from './components/Comp';
 import Controls from './components/Controls';
 
-import { loadImage } from './utils/loadImage';
+import { loadImage, readFile } from './utils/loadImage';
 import { defaultImg } from './data/defaultImg';
 
 class App extends Component {
@@ -23,6 +23,19 @@ class App extends Component {
     this.incrementZoom = this.incrementZoom.bind(this);
     this.updateImage = this.updateImage.bind(this);
     this.updateZoom = this.updateZoom.bind(this);
+  }
+
+  componentDidMount() {
+    document.ondragover = document.ondrop = e => {
+      e.preventDefault();
+    };
+
+    document.body.ondrop = e => {
+      const filePath = e.dataTransfer.files[0].path;
+
+      readFile(this.updateImage, filePath);
+      e.preventDefault();
+    };
   }
 
   render() {

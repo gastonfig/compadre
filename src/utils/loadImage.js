@@ -12,15 +12,19 @@ export const loadImage = updateImage => {
         return;
       }
 
-      fs.readFile(filepath[0], (err, data) => {
-        if (err) {
-          alert('An error ocurred reading the file :' + err.message);
-          return;
-        }
-
-        const base64Image = new Buffer(data, 'binary').toString('base64');
-        updateImage(base64Image);
-      });
+      readFile(updateImage, filepath[0]);
     }
   );
+};
+
+export const readFile = (updateImage, filepath) => {
+  fs.readFile(filepath, (err, data) => {
+    if (err) {
+      alert('An error ocurred reading the file :' + err.message);
+      return;
+    }
+
+    const base64Image = new Buffer(data, 'binary').toString('base64');
+    updateImage(base64Image);
+  });
 };
