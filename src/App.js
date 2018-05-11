@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import image from './screenshot.png';
-
 import Comp from './components/Comp';
 import Controls from './components/Controls';
+
+import { loadImage } from './utils/loadImage';
+import { defaultImg } from './data/defaultImg';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      image: defaultImg,
       opacity: 1,
       zoom: 1
     };
 
     this.decrementZoom = this.decrementZoom.bind(this);
+    this.handleImageLoad = this.handleImageLoad.bind(this);
     this.handleOpacityChange = this.handleOpacityChange.bind(this);
     this.incrementZoom = this.incrementZoom.bind(this);
+    this.updateImage = this.updateImage.bind(this);
     this.updateZoom = this.updateZoom.bind(this);
   }
 
   render() {
     return (
       <div className="App">
+        <button className="loadButton" onClick={this.handleImageLoad}>
+          Load
+        </button>
         <div className="titleBar" />
         <div className="container">
           <Controls
@@ -34,13 +41,21 @@ class App extends Component {
             zoom={this.state.zoom}
           />
           <Comp
-            image={image}
+            image={this.state.image}
             opacity={this.state.opacity}
             zoom={this.state.zoom}
           />
         </div>
       </div>
     );
+  }
+
+  updateImage(image) {
+    this.setState({ image: image });
+  }
+
+  handleImageLoad() {
+    loadImage(this.updateImage);
   }
 
   handleOpacityChange(event) {

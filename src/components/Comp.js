@@ -6,7 +6,14 @@ const Comp = ({ image, opacity, zoom }) => {
     transform: `scale(${zoom})`
   };
 
-  return <img alt="" className="Comp" src={image} style={style} />;
+  return (
+    <img
+      alt=""
+      className="Comp"
+      src={'data:image/png;base64, ' + image}
+      style={style}
+    />
+  );
 };
 
 export default Comp;
