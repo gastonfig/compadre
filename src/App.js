@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Comp from './components/Comp';
-import Controls from './components/Controls';
+import Titlebar from './components/Titlebar';
 
 import { loadImage, readFile } from './utils/loadImage';
 import { defaultImg } from './data/defaultImg';
@@ -17,12 +17,10 @@ class App extends Component {
       zoom: 1
     };
 
-    this.decrementZoom = this.decrementZoom.bind(this);
     this.handleImageLoad = this.handleImageLoad.bind(this);
     this.handleOpacityChange = this.handleOpacityChange.bind(this);
-    this.incrementZoom = this.incrementZoom.bind(this);
+    this.handleZoomChange = this.handleZoomChange.bind(this);
     this.updateImage = this.updateImage.bind(this);
-    this.updateZoom = this.updateZoom.bind(this);
   }
 
   componentDidMount() {
@@ -41,18 +39,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button className="loadButton" onClick={this.handleImageLoad}>
-          Load
-        </button>
-        <div className="titleBar" />
+        <Titlebar
+          handleImageLoad={this.handleImageLoad}
+          handleOpacityChange={this.handleOpacityChange}
+          handleZoomChange={this.handleZoomChange}
+          opacity={this.state.opacity}
+          zoom={this.state.zoom}
+        />
         <div className="container">
-          <Controls
-            decrementZoom={this.decrementZoom}
-            handleOpacityChange={this.handleOpacityChange}
-            incrementZoom={this.incrementZoom}
-            opacity={this.state.opacity}
-            zoom={this.state.zoom}
-          />
           <Comp
             image={this.state.image}
             opacity={this.state.opacity}
@@ -75,22 +69,8 @@ class App extends Component {
     this.setState({ opacity: event.target.value });
   }
 
-  decrementZoom() {
-    this.updateZoom('down');
-  }
-
-  incrementZoom() {
-    this.updateZoom('up');
-  }
-
-  updateZoom(upDown) {
-    const zoom = this.state.zoom;
-    const value = upDown === 'up' ? 0.1 : -0.1;
-    const newZoom = zoom + value;
-
-    this.setState({
-      zoom: newZoom
-    });
+  handleZoomChange(event) {
+    this.setState({ zoom: event.target.value });
   }
 }
 
