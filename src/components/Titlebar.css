@@ -2,10 +2,11 @@
   -webkit-app-region: drag;
   align-items: center;
   background: var(--color-off-white);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   display: flex;
   height: 30px;
-  left: 1px;
+  left: 0;
   position: fixed;
-  top: 1px;
-  width: calc(100vw - 2px);
+  top: 0;
+  width: calc(100vw);
 }

@@ -20,7 +20,7 @@ const Controls = ({
       min=".1"
       max="2"
       onChange={handleZoomChange}
-      step="0.1"
+      step="0.05"
       value={zoom}
     />
     <Slider
