@@ -21,7 +21,8 @@
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
     "preelectron-pack": "yarn build",
-    "electron-pack": "build",
+    "electron-pack": "build --publish=never",
+    "electron-publish": "build --publish=onTagOrDraft",
     "pretty": "prettier --write --single-quote 'src/**/*.js'",
     "precommit": "lint-staged"
   },
@@ -51,6 +52,10 @@
     ],
     "directories": {
       "buildResources": "build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "publish": ["github"]
     }
   }
 }
