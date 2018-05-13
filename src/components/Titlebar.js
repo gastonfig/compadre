@@ -6,6 +6,7 @@ import './Titlebar.css';
 
 const Titlebar = ({
   decrementZoom,
+  fileName,
   handleImageLoad,
   handleOpacityChange,
   handleZoomChange,
@@ -14,6 +15,9 @@ const Titlebar = ({
   zoom
 }) => (
   <div className="Titlebar">
+    <button className="loadButton" onClick={handleImageLoad}>
+      {fileName || 'Load an image…'}
+    </button>
     <Controls
       handleOpacityChange={handleOpacityChange}
       handleImageLoad={handleImageLoad}

@@ -1,7 +1,7 @@
 const { dialog } = window.require('electron').remote;
 var fs = window.require('fs');
 
-export const loadImage = updateImage => {
+export const loadImage = (updateFileName, updateImage) => {
   dialog.showOpenDialog(
     {
       filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }]
@@ -12,6 +12,7 @@ export const loadImage = updateImage => {
         return;
       }
 
+      updateFileName(filepath[0]);
       readFile(updateImage, filepath[0]);
     }
   );

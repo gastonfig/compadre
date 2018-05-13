@@ -1,7 +1,6 @@
 .Controls {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
   margin-left: auto;
   width: 460px;
   z-index: 1;

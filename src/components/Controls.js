@@ -4,17 +4,8 @@ import './Controls.css';
 
 import Slider from './Slider';
 
-const Controls = ({
-  handleImageLoad,
-  handleOpacityChange,
-  handleZoomChange,
-  opacity,
-  zoom
-}) => (
+const Controls = ({ handleOpacityChange, handleZoomChange, opacity, zoom }) => (
   <div className="Controls">
-    <button className="loadButton" onClick={handleImageLoad}>
-      Load
-    </button>
     <Slider
       label="zoom"
       min=".1"

@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      fileName: undefined,
       image: defaultImg,
       opacity: 1,
       zoom: 1
@@ -21,6 +22,7 @@ class App extends Component {
     this.handleOpacityChange = this.handleOpacityChange.bind(this);
     this.handleZoomChange = this.handleZoomChange.bind(this);
     this.updateImage = this.updateImage.bind(this);
+    this.updateFileName = this.updateFileName.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +31,11 @@ class App extends Component {
     };
 
     document.body.ondrop = e => {
-      const filePath = e.dataTransfer.files[0].path;
+      const file = e.dataTransfer.files[0];
+      const fileName = file.name;
+      const filePath = file.path;
+
+      this.updateFileName(fileName);
 
       readFile(this.updateImage, filePath);
       e.preventDefault();
@@ -40,6 +46,7 @@ class App extends Component {
     return (
       <div className="App">
         <Titlebar
+          fileName={this.state.fileName}
           handleImageLoad={this.handleImageLoad}
           handleOpacityChange={this.handleOpacityChange}
           handleZoomChange={this.handleZoomChange}
@@ -61,8 +68,14 @@ class App extends Component {
     this.setState({ image: image });
   }
 
+  updateFileName(fileName) {
+    fileName = fileName.replace(/^.*[\\/]/, '');
+
+    this.setState({ fileName: fileName });
+  }
+
   handleImageLoad() {
-    loadImage(this.updateImage);
+    loadImage(this.updateFileName, this.updateImage);
   }
 
   handleOpacityChange(event) {
