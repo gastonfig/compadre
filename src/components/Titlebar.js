@@ -1,16 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Controls from './Controls';
 
 import './Titlebar.css';
 
 const Titlebar = ({
-  decrementZoom,
   fileName,
   handleImageLoad,
   handleOpacityChange,
   handleZoomChange,
-  incrementZoom,
   opacity,
   zoom
 }) => (
@@ -27,5 +26,14 @@ const Titlebar = ({
     />
   </div>
 );
+
+Titlebar.propTypes = {
+  fileName: PropTypes.string,
+  handleImageLoad: PropTypes.func.isRequired,
+  handleOpacityChange: PropTypes.func.isRequired,
+  handleZoomChange: PropTypes.func.isRequired,
+  opacity: PropTypes.string.isRequired,
+  zoom: PropTypes.string.isRequired
+};
 
 export default Titlebar;

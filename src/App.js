@@ -14,8 +14,8 @@ class App extends Component {
     this.state = {
       fileName: undefined,
       image: defaultImg,
-      opacity: 1,
-      zoom: 1
+      opacity: '1',
+      zoom: '1'
     };
 
     this.handleImageLoad = this.handleImageLoad.bind(this);
