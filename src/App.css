@@ -1,7 +1,10 @@
 :root {
   --color-black: #000;
-  --color-off-white: #FAFAFA;
-  --color-outer-border: rgba(216, 216, 216, 0.5);
+  --color-white: #fff;
+  --color-outer-border: rgba(0, 0, 0, 0.2);
+  --color-traffic-light-green: #29CE42;
+  --color-traffic-light-red: #FF6059;
+  --color-traffic-light-yellow: #FFC22E;
 }
 
 body,
@@ -13,7 +16,7 @@ html {
 
 body {
   background: rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--color-off-white);
+  border: 1px solid var(--color-outer-border);
   border-radius: 4px;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
