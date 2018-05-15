@@ -19,7 +19,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3006 electron .",
     "preelectron-pack": "yarn build",
     "electron-pack": "build --publish=never",
     "electron-publish": "build --publish=onTagOrDraft",
