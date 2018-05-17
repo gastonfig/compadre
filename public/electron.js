@@ -5,6 +5,7 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let ignoreMouseEvents = false;
 
 function createWindow() {
   // Create the browser window.
@@ -53,6 +54,14 @@ function createWindow() {
           }
         },
         {
+          label: 'Click-through',
+          type: 'checkbox',
+          checked: ignoreMouseEvents,
+          click: () => {
+            mainWindow.setIgnoreMouseEvents(toggleMouseEvents());
+          }
+        },
+        {
           type: 'separator'
         },
         { role: 'reload' },
@@ -90,6 +99,11 @@ function createWindow() {
 
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
+}
+
+function toggleMouseEvents() {
+  ignoreMouseEvents = !ignoreMouseEvents;
+  return ignoreMouseEvents;
 }
 
 // This method will be called when Electron has finished
