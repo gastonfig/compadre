@@ -4,7 +4,7 @@ var fs = window.require('fs');
 export const loadImage = (updateFileName, updateImage) => {
   dialog.showOpenDialog(
     {
-      filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }]
+      filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif'] }]
     },
     function(filepath) {
       if (filepath === undefined) {
