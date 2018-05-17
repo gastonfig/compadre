@@ -62,6 +62,14 @@ function createWindow() {
           }
         },
         {
+          label: 'Locked',
+          type: 'checkbox',
+          checked: !mainWindow.isMovable(),
+          click: () => {
+            mainWindow.setMovable(!mainWindow.isMovable());
+          }
+        },
+        {
           type: 'separator'
         },
         { role: 'reload' },
