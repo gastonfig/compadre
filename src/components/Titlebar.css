@@ -1,5 +1,6 @@
 .Titlebar {
   -webkit-app-region: drag;
+  pointer-events: none;
   align-items: center;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-outer-border);
@@ -22,6 +23,7 @@
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .08);
   outline: none;
+  pointer-events: auto;
   padding: 4px 8px;
 }
 

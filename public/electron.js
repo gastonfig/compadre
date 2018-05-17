@@ -1,10 +1,11 @@
-const { app, BrowserWindow, Tray } = require('electron');
+const { app, BrowserWindow, Menu, Tray } = require('electron');
 const path = require('path');
 const url = require('url');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let ignoreMouseEvents = false;
 
 function createWindow() {
   // Create the browser window.
@@ -14,6 +15,69 @@ function createWindow() {
     transparent: true,
     width: 800
   });
+
+  const menuTemplate = [
+    {
+      label: 'Electron',
+      submenu: [
+        {
+          role: 'about'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          role: 'quit'
+        }
+      ]
+    },
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          click: () => {
+            mainWindow.webContents.send('openFile');
+          }
+        }
+      ]
+    },
+    {
+      label: 'Actions',
+      submenu: [
+        {
+          label: 'Always on top',
+          type: 'checkbox',
+          checked: mainWindow.isAlwaysOnTop(),
+          click: () => {
+            mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
+          }
+        },
+        {
+          label: 'Click-through',
+          type: 'checkbox',
+          checked: ignoreMouseEvents,
+          click: () => {
+            mainWindow.setIgnoreMouseEvents(toggleMouseEvents());
+          }
+        },
+        {
+          label: 'Locked',
+          type: 'checkbox',
+          checked: !mainWindow.isMovable(),
+          click: () => {
+            mainWindow.setMovable(!mainWindow.isMovable());
+          }
+        },
+        {
+          type: 'separator'
+        },
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' }
+      ]
+    }
+  ];
 
   // and load the index.html of the app.
   const startUrl =
@@ -40,6 +104,14 @@ function createWindow() {
   mainWindow.on('resize', function() {
     mainWindow.setHasShadow(false);
   });
+
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+}
+
+function toggleMouseEvents() {
+  ignoreMouseEvents = !ignoreMouseEvents;
+  return ignoreMouseEvents;
 }
 
 // This method will be called when Electron has finished

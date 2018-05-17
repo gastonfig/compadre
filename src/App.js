@@ -7,6 +7,8 @@ import Titlebar from './components/Titlebar';
 import { loadImage, readFile } from './utils/loadImage';
 import { defaultImg } from './data/defaultImg';
 
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +42,10 @@ class App extends Component {
       readFile(this.updateImage, filePath);
       e.preventDefault();
     };
+
+    ipcRenderer.on('openFile', (event, message) => {
+      this.handleImageLoad();
+    });
   }
 
   render() {
