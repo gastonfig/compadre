@@ -76,6 +76,10 @@ function createWindow() {
         { role: 'forcereload' },
         { role: 'toggledevtools' }
       ]
+    },
+    {
+      role: 'window',
+      submenu: [{ role: 'hide' }, { role: 'minimize' }]
     }
   ];
 
