@@ -19,7 +19,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:3006 electron .",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3006 && electron .\"",
     "preelectron-pack": "yarn build",
     "electron-pack": "build --publish=never",
     "electron-publish": "build --publish=onTagOrDraft",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
+    "concurrently": "^3.5.1",
     "electron": "^1.8.4",
     "electron-builder": "^20.5.1",
     "eslint": "^4.19.0",
@@ -43,7 +44,8 @@
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
-    "prettier": "1.11.1"
+    "prettier": "1.11.1",
+    "wait-on": "^2.1.0"
   },
   "build": {
     "appId": "com.gastonfig.compadre",
@@ -55,7 +57,9 @@
     },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     }
   }
 }
