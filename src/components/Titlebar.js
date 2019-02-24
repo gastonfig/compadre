@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Controls from './Controls';
-import TrafficLights from './TrafficLights';
 
 import './Titlebar.css';
 
@@ -15,9 +14,8 @@ const Titlebar = ({
   zoom
 }) => (
   <div className="Titlebar">
-    <TrafficLights />
     <button className="loadButton" onClick={handleImageLoad}>
-      {fileName || 'Load an image'}
+      {fileName || 'Load image'}
     </button>
     <Controls
       handleOpacityChange={handleOpacityChange}

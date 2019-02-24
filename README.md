@@ -1,6 +1,6 @@
 # Compadre
 
-A Mac app that overlays design comps on top of developed sites or apps to compare them.\
+A Mac app that overlays design comps on top of developed sites or apps to compare them.
 
 ![](/resources/compadre.gif)
 

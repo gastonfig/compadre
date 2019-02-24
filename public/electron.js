@@ -19,7 +19,8 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     contextIsolation: true,
-    frame: false,
+    titleBarStyle: 'hiddenInset',
+    // frame: false,
     height: 600,
     nodeIntegration: false,
     transparent: true,
