@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, Tray } = require('electron');
+const { app, BrowserWindow, Menu, session } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -8,10 +8,20 @@ let mainWindow;
 let ignoreMouseEvents = false;
 
 function createWindow() {
+  // Denies all permissions requests
+  // https://electronjs.org/docs/tutorial/security#4-handle-session-permission-requests-from-remote-content
+  session
+    .fromPartition('some-partition')
+    .setPermissionRequestHandler((webContents, permission, callback) => {
+      return callback(false);
+    });
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    contextIsolation: true,
     frame: false,
     height: 600,
+    nodeIntegration: false,
     transparent: true,
     width: 800
   });
@@ -140,5 +150,28 @@ app.on('activate', function() {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// Follows some of the recommendations from https://electronjs.org/docs/tutorial/security
+app.on('web-contents-created', (event, contents) => {
+  contents.on('will-attach-webview', (event, webPreferences) => {
+    // Strip away preload scripts if unused or verify their location is legitimate
+    delete webPreferences.preload;
+    delete webPreferences.preloadURL;
+
+    // Disable Node.js integration
+    webPreferences.nodeIntegration = false;
+
+    event.preventDefault();
+  });
+
+  contents.on('will-navigate', event => {
+    event.preventDefault();
+  });
+
+  contents.on('new-window', (event, navigationUrl) => {
+    // In this example, we'll ask the operating system
+    // to open this event's url in the default browser.
+    event.preventDefault();
+
+    shell.openExternalSync(navigationUrl);
+  });
+});
