@@ -4,7 +4,7 @@
   "productName": "Compadre",
   "author": "Gaston Figueroa",
   "description": "Compadre is a Mac app that overlays design comps on top of developed sites or apps to compare them.",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "electron-is-dev": "^1.0.1",
